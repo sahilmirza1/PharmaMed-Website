@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background.png'); /* Ensure this file exists in the same folder */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 400px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    padding: 20px;
+}
+
+h2 {
+    color: #fff;
+    font-size: 2em;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+
+.form-group {
+    position: relative;
+    width: 330px;
+    margin: 30px 0;
+    border-bottom: 3px solid #fff;
+}
+
+.form-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 35px 0 10px;
+    font-size: 1.2em;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+
+.form-group input[type="tel"] {
+    width: 100%;
+    height: 50px;
+    padding: 0 35px 0 10px;
+    font-size: 1.2em;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: #fff;
+    transition: 0.5s;
+    pointer-events: none; /* Prevents label from interfering with input */
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label {
+    top: -5px;
+}
+
+.form-group i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.options {
+    text-align: center;
+    color: #fff;
+    margin: 10px 0;
+    width: 330px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.options label {
+    font-size: 1em;
+}
+
+.options a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.options a:hover {
+    text-decoration: underline;
+    font-style: italic;
+}
+
+p {
+    text-align: center;
+    color: #fff;
+    margin: 10px 0;
+}
+
+p a {
+    text-decoration: none;
+    color: white; /* Blue color for the Register/Login links */
+    font-weight: 600;
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 20px;
+    display: inline-block; /* Makes it button-like */
+    transition: background-color 0.3s;
+    z-index: 1000; /* Ensure link is clickable */
+    cursor: pointer;
+}
+
+p a:hover {
+    background-color: #00aaff;
+    color: #fff;
+}
+
+#btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    font-size: 1.5em;
+   
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+    z-index: 1000; /* Ensure button is clickable */
+    pointer-events: auto;
+    text-align: center;
+}
+
+#btn:hover {
+   background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+
+
+
+/* Ensure OTP boxes are in a horizontal row and fit within container */
+.otp-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Center the boxes to align properly */
+    align-items: center;
+    gap: 10px; /* Reduced gap for smaller boxes */
+    margin-top: 10px;
+    width: 100%; /* Ensure it respects the parent width */
+}
+
+/* Style each OTP box individually with smaller size */
+.otp-box {
+    width: 40px; /* Smaller box size to fit within 330px */
+    height: 40px; /* Smaller box size to match width for square shape */
+    font-size: 20px; /* Adjusted font size to fit smaller boxes */
+    font-weight: 700; /* Bold text for better visibility */
+    line-height: 40px; /* Matches height for vertical centering */
+    text-align: center;
+    background-color: transparent; /* More opaque white background */
+    border: 3px solid #333; /* Thinner border to fit smaller size */
+    color: white; /* Black text for maximum contrast */
+    border-radius: 4px; /* Slight rounding */
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    cursor: text; /* Visual cue that the field is non-editable */
+}
+
+.otp-box:focus {
+    border-color: #119c46; /* Blue focus border to match theme */
+    box-shadow: 0 0 5px #119c46(0, 170, 255, 0.5);
+}
+
+/* Button Styling */
+.resend-btn {
+    width: 120px; /* Fixed width to prevent overflow, adjustable as needed */
+    height: 25px;
+    border-radius: 40px;
+    border: none;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #333;
+    color: white;
+    border: 1px solid black;
+    margin: 10px 0;
+    display: block; /* Ensure it behaves as a block element */
+    margin-left: auto;
+    margin-right: auto; /* Center the button */
+}
+
+.resend-btn:hover {
+    opacity: 0.8;
+}
+
+
+#continueBtn {
+    width: 100%; /* Full width within the container */
+    max-width: 330px; /* Limit to .otp-group width to prevent overflow */
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all 0.5s;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+    z-index: 1000;
+    pointer-events: auto;
+    text-align: center;
+    display: block; /* Ensure it behaves as a block element */
+    margin-left: auto;
+    margin-right: auto; /* Center the button */
+}
+
+#continueBtn:hover {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.button{
+   cursor: pointer;
+   background-color: white;
+   color: #333;
+   
+}
+
+
+.form-groupp  {
+    position: relative;
+    width: 410px;
+    padding: 0 30px 0 5px;
+    margin: 5px 0;
+    background-color: transparent;
+   
+}
+
+.otp-group{
+   
+}
+
+.otp-container {
+    width: 400px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    padding: 20px;
+}
+
+h2{
+    text-align: center;
+}
+
+
+

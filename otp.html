@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaMed - OTP Verification</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/97ebdf5864.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>Login/Sign Up to Continue</h2>
+        <p>Enter the OTP sent to <span id="mobileDisplay"></span></p>
+        <form id="otpForm">
+            <div class="form-groupp otp-group">
+                <label for="otp"></label>
+                <div class="otp-inputs">
+                    <input type="text" maxlength="1" class="otp-box" required>
+                    <input type="text" maxlength="1" class="otp-box" required>
+                    <input type="text" maxlength="1" class="otp-box" required>
+                    <input type="text" maxlength="1" class="otp-box" required>
+                    <input type="text" maxlength="1" class="otp-box" required>
+                    <input type="text" maxlength="1" class="otp-box" required>
+                </div>
+            </div>
+            <br>
+            <button type="button" class="resend-btn" onclick="resendOtp()">Resend OTP</button>
+            <br>
+            <input id="continueBtn" type="button" value="Continue" onclick="verifyOtp()">
+        </form>
+    </div>
+
+    <script>
+        // Display the mobile number
+        const mobile = localStorage.getItem('mobile') || 'Unknown';
+        document.getElementById('mobileDisplay').textContent = mobile;
+    
+        // Display the OTP for testing (remove this in production)
+        const generatedOtp = localStorage.getItem('generatedOtp');
+        console.log('For testing, OTP is:', generatedOtp); // Check console
+        // Optionally, add to page: uncomment below
+        // document.getElementById('mobileDisplay').textContent += ` (OTP: ${generatedOtp})`;
+    
+        // Auto-focus the first OTP box on page load
+        document.querySelector('.otp-box').focus();
+    
+        // Store all OTP boxes in a variable for efficiency
+        const otpBoxes = document.querySelectorAll('.otp-box');
+    
+        // Add event listeners for input and navigation
+        otpBoxes.forEach((box, index) => {
+            box.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < otpBoxes.length - 1) {
+                    otpBoxes[index + 1].focus();
+                }
+            });
+    
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && box.value === '' && index > 0) {
+                    otpBoxes[index - 1].focus();
+                }
+            });
+    
+            box.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+        });
+    
+        function verifyOtp() {
+            const enteredOtp = Array.from(otpBoxes)
+                                   .map(input => input.value)
+                                   .join('');
+            const generatedOtp = localStorage.getItem('generatedOtp');
+    
+            if (enteredOtp.length !== 6) {
+                alert('Please enter a complete 6-digit OTP');
+            } else if (enteredOtp === generatedOtp) {
+                alert('OTP verified successfully!');
+                localStorage.removeItem('generatedOtp');
+                window.location.href = 'home.html';
+            } else {
+                alert('Invalid OTP. Please try again.');
+            }
+        }
+    
+        function resendOtp() {
+            const mobile = localStorage.getItem('mobile');
+            const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            localStorage.setItem('generatedOtp', newOtp);
+            alert(`New OTP ${newOtp} has been resent to ${mobile}`);
+            otpBoxes.forEach(box => box.value = '');
+            otpBoxes[0].focus();
+        }
+    </script>

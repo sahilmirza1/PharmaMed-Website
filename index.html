@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaMed - Login/Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/97ebdf5864.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login/Sign Up</h2>
+        <form id="authForm">
+            <div class="form-group">
+                <input type="tel" id="mobile" required placeholder="Mobile Number (e.g., +1234567890)">
+                <label for="mobile">Mobile Number</label>
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <!-- Fixed button syntax: type="button" and onclick instead of <a> -->
+            <input id="btn" type="button" value="Send OTP" onclick="sendOtp()">
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

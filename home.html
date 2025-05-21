@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaMed - Home</title>
+    <script src="https://kit.fontawesome.com/97ebdf5864.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        /* Header */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00c4cc;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+            cursor: pointer;
+        }
+        .search-bar input:focus {
+            border-color: #00c4cc;
+            box-shadow: 0 0 5px rgba(0, 196, 204, 0.5);
+        }
+        .search-button {
+            padding: 8px 15px;
+            background-color: #00c4cc;
+            color: white;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        /* Hero */
+        .hero {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .hero h1 {
+            font-size: 36px;
+            color: #00c4cc;
+            margin: 0;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .hero-buttons a {
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .hero-buttons .btn-primary {
+            background-color: #00c4cc;
+            color: white;
+        }
+        /* Categories */
+        .categories {
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+        .categories h2 {
+            font-size: 28px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .category-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px;
+            white-space: nowrap;
+            justify-content: flex-start;
+            scroll-snap-type: x mandatory;
+        }
+        .category-card {
+            min-width: 150px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+        .product-list {
+            display: none;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px auto;
+            max-width: 90%;
+        }
+        .category-card.active + .product-list {
+            display: block;
+        }
+        .product-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .product-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+        }
+        .product-card {
+            min-width: 150px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .product-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .product-card h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #00c4cc;
+            cursor: pointer;
+        }
+        .product-card h3:hover {
+            color: #007bff;
+        }
+        .product-card p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .product-card .discount {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 12px;
+        }
+        .btn {
+            padding: 6px 12px;
+            background-color: #00c4cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Featured Products */
+        .featured-products {
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+        .featured-products h2 {
+            font-size: 28px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .product-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+        }
+        .product-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+        }
+        .featured-products .product-card {
+            min-width: 180px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        .featured-products .product-card:hover {
+            transform: scale(1.05);
+        }
+        /* Offers */
+        .offers {
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+        .offers h2 {
+            font-size: 28px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .offer-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+        }
+        .offer-card {
+            min-width: 180px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        .offer-card:hover {
+            transform: scale(1.05);
+        }
+        /* Scrollbar */
+        .category-grid, .product-row, .offer-grid {
+            scrollbar-width: thin;
+            scrollbar-color: #00c4cc #ddd;
+        }
+        .category-grid::-webkit-scrollbar, .product-row::-webkit-scrollbar, 
+        .offer-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+        .category-grid::-webkit-scrollbar-thumb, .product-row::-webkit-scrollbar-thumb, 
+        .offer-grid::-webkit-scrollbar-thumb {
+            background-color: #00c4cc;
+            border-radius: 10px;
+        }
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #e6f7f9 0%, #d1ecef 100%);
+            padding: 50px 20px;
+            color: #333;
+            font-size: 14px;
+            border-top: 3px solid #00c4cc;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 180px;
+            margin-bottom: 20px;
+        }
+        .footer-column h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00c4cc;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: #00c4cc;
+            transition: width 0.3s ease;
+        }
+        .footer-column h4:hover::after {
+            width: 100%;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .footer-column ul li a {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+        .footer-column ul li a i {
+            margin-right: 8px;
+            color: #00c4cc;
+            font-size: 14px;
+        }
+        .footer-column ul li a:hover {
+            color: #00c4cc;
+            transform: translateX(5px);
+        }
+        .footer-column .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .footer-column .social-links a {
+            color: #333;
+            font-size: 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .footer-column .social-links a:hover {
+            color: #00c4cc;
+            transform: scale(1.2);
+        }
+        .footer-column .newsletter p {
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #555;
+        }
+        .footer-column .newsletter form {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .footer-column .newsletter input {
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        .footer-column .newsletter button {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00c4cc, #007bff);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .footer-column .newsletter button:hover {
+            background: linear-gradient(90deg, #007bff, #00c4cc);
+        }
+        .footer-column .app-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .footer-column .app-links a {
+            transition: transform 0.3s ease;
+        }
+        .footer-column .app-links a:hover {
+            transform: scale(1.05);
+        }
+        .footer-column .app-links img {
+            width: 130px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .footer-column .payment-partners {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .footer-column .payment-partners img {
+            height: 35px;
+            width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .footer-column .payment-partners img:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#home" onclick="alert('Back to Home')">PharmaMed</a>
+            </div>
+            <div class="search-bar" onclick="document.querySelector('.search-bar input').focus()">
+                <input type="text" placeholder="Search Medicines, Health Products & More">
+                <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" onclick="alert('Home clicked')">Home</a>
+                <a href="#medicines" onclick="alert('Medicines clicked')">Medicines</a>
+                <a href="#healthcare" onclick="alert('Healthcare clicked')">Healthcare</a>
+                <a href="#lab-tests" onclick="alert('Lab Tests clicked')">Lab Tests</a>
+                <a href="#offers" onclick="alert('Offers clicked')">Offers</a>
+                <a href="#login" onclick="alert('Login/Sign Up clicked')">Login/Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero" onclick="window.scrollTo({ top: document.querySelector('#categories').offsetTop, behavior: 'smooth' })">
+        <h1>India’s Most Trusted Online Pharmacy</h1>
+        <p>Order Medicines, Book Lab Tests, and More!</p>
+        <div class="hero-buttons">
+            <a href="#categories" class="btn-primary" onclick="alert('Shop Now clicked')">Shop Now</a>
+            <a href="#lab-tests" class="btn" onclick="alert('Book a Test clicked')">Book a Test</a>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="categories">
+        <h2 onclick="alert('Shop by Category clicked')">Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" data-target="diabetic-care-products">Diabetic Care <i class="fa-solid fa-syringe"></i></div>
+            <div class="category-card" data-target="heart-health-products">Heart Health <i class="fa-solid fa-heart"></i></div>
+            <div class="category-card" data-target="skin-hair-products">Skin & Hair <i class="fa-solid fa-face-smile"></i></div>
+            <div class="category-card" data-target="pain-relief-products">Pain Relief <i class="fa-solid fa-bandage"></i></div>
+            <div class="category-card" data-target="vitamins-products">Vitamins <i class="fa-solid fa-pills"></i></div>
+            <div class="category-card" data-target="wellness-products">Wellness <i class="fa-solid fa-spa"></i></div>
+            <div class="category-card" data-target="baby-care-products">Baby Care <i class="fa-solid fa-baby"></i></div>
+        </div>
+        <!-- Product Lists with Two Rows -->
+        <div id="diabetic-care-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Glucose Meter clicked')">
+                        <img src="https://plus.unsplash.com/premium_photo-1702599120667-d86c2eb51ada?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2x1Y29zZSUyMG1ldGVyfGVufDB8fDB8fHww" alt="Glucose Meter">
+                        <h3>Glucose Meter</h3><p>₹799 <span class="discount">₹900</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Insulin Syringe clicked')">
+                        <img src="https://media.post.rvohealth.io/wp-content/uploads/2021/02/insulin-syringe-syringes-732x549-thumbnail-732x549.jpg">
+                        <h3>Insulin Syringe</h3><p>₹50 <span class="discount">₹60</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Glucostrips clicked')">
+                        <img src="https://media.istockphoto.com/id/163271377/photo/bottle-of-indicator-strips-for-blood-glucose-testing.jpg?s=612x612&w=0&k=20&c=5VHL-p324BulIMlqFvFnTNZusLM6kuzx6F4ktQG0LnA=" alt="Glucostrips">
+                        <h3>Glucostrips (50)</h3><p>₹499 <span class="discount">₹600</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Diabetic Socks clicked')">
+                        <img src="https://m.media-amazon.com/images/I/910H+anxRCL._AC_UY1100_.jpg" alt="Diabetic Socks">
+                        <h3>Diabetic Socks</h3><p>₹199 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Sugar-Free Tablets clicked')">
+                        <img src="https://gargdastak.com/wp-content/uploads/2021/12/DSTK14332.jpg" alt="Sugar-Free Tablets">
+                        <h3>Sugar-Free Tablets</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Lancets clicked')">
+                        <img src="https://m.media-amazon.com/images/I/71iJfbmfXbL.jpg" alt="Lancets">
+                        <h3>Lancets (100)</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Diabetic Foot Cream clicked')">
+                        <img src="https://onemg.gumlet.io/l_watermark_346,w_480,h_480/a_ignore,w_480,h_480,c_fit,q_auto,f_auto/pw6k8bq2clvk353ebt5f.jpg" alt="Diabetic Foot Cream">
+                        <h3>Diabetic Foot Cream</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Blood Sugar Monitor clicked')">
+                        <img src="https://drtrust.in/cdn/shop/products/dr-trust-usa-glucose-monitor-glucometer-sugar-check-test-10-strips-113-29061094146094.png?v=1682059774" alt="Blood Sugar Monitor">
+                        <h3>Blood Sugar Monitor</h3><p>₹899 <span class="discount">₹1000</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Insulin Pen clicked')">
+                        <img src="https://gluroo.com/wp-content/uploads/2024/04/insulin-pens-diabetes.jpg.webp" alt="Insulin Pen">
+                        <h3>Insulin Pen</h3><p>₹599 <span class="discount">₹650</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Diabetic Test Strips clicked')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk6ycwzGlcwO1WjDcHWAkQITX9TUXJfWKNJg&s" alt="Diabetic Test Strips">
+                        <h3>Diabetic Test Strips</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Glucose Tablets clicked')">
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2023/8/334486790/OT/RO/UE/136059498/glucose-tablet-chewable.jpg" alt="Glucose Tablets">
+                        <h3>Glucose Tablets</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Diabetic Snacks clicked')">
+                        <img src="https://daybydaydiabetes.com/wp-content/uploads/2024/02/best-packaged-snacks-for-diabetics.jpg" alt="Diabetic Snacks">
+                        <h3>Diabetic Snacks</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="heart-health-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('BP Monitor clicked')">
+                        <img src="https://via.placeholder.com/80?text=BP+Monitor" alt="BP Monitor">
+                        <h3>BP Monitor</h3><p>₹999 <span class="discount">₹1200</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Cholesterol Kit clicked')">
+                        <img src="https://via.placeholder.com/80?text=Cholesterol+Kit" alt="Cholesterol Test Kit">
+                        <h3>Cholesterol Test Kit</h3><p>₹499 <span class="discount">₹600</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Omega-3 clicked')">
+                        <img src="https://via.placeholder.com/80?text=Omega-3" alt="Omega-3 Capsules">
+                        <h3>Omega-3 Capsules</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Heart Tonic clicked')">
+                        <img src="https://via.placeholder.com/80?text=Heart+Tonic" alt="Heart Tonic">
+                        <h3>Heart Tonic</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Oximeter clicked')">
+                        <img src="https://via.placeholder.com/80?text=Oximeter" alt="Pulse Oximeter">
+                        <h3>Pulse Oximeter</h3><p>₹599 <span class="discount">₹700</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('ECG Monitor clicked')">
+                        <img src="https://via.placeholder.com/80?text=ECG+Monitor" alt="ECG Monitor">
+                        <h3>ECG Monitor</h3><p>₹1499 <span class="discount">₹1800</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('CoQ10 Supplement clicked')">
+                        <img src="https://via.placeholder.com/80?text=CoQ10" alt="CoQ10 Supplement">
+                        <h3>CoQ10 Supplement</h3><p>₹499 <span class="discount">₹550</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Fish Oil clicked')">
+                        <img src="https://via.placeholder.com/80?text=Fish+Oil" alt="Fish Oil">
+                        <h3>Fish Oil</h3><p>₹349 <span class="discount">₹400</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Heart Rate Monitor clicked')">
+                        <img src="https://via.placeholder.com/80?text=Heart+Rate+Monitor" alt="Heart Rate Monitor">
+                        <h3>Heart Rate Monitor</h3><p>₹799 <span class="discount">₹900</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Aspirin clicked')">
+                        <img src="https://via.placeholder.com/80?text=Aspirin" alt="Aspirin">
+                        <h3>Aspirin (10)</h3><p>₹50 <span class="discount">₹60</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Blood Pressure Cuff clicked')">
+                        <img src="https://via.placeholder.com/80?text=BP+Cuff" alt="Blood Pressure Cuff">
+                        <h3>Blood Pressure Cuff</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Heart Health Supplement clicked')">
+                        <img src="https://via.placeholder.com/80?text=Heart+Supplement" alt="Heart Health Supplement">
+                        <h3>Heart Health Supplement</h3><p>₹599 <span class="discount">₹650</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="skin-hair-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Moisturizer clicked')">
+                        <img src="https://via.placeholder.com/80?text=Moisturizer" alt="Moisturizer">
+                        <h3>Moisturizer</h3><p>₹250 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Hair Oil clicked')">
+                        <img src="https://via.placeholder.com/80?text=Hair+Oil" alt="Hair Oil">
+                        <h3>Hair Oil</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Face Wash clicked')">
+                        <img src="https://via.placeholder.com/80?text=Face+Wash" alt="Face Wash">
+                        <h3>Face Wash</h3><p>₹199 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Shampoo clicked')">
+                        <img src="https://via.placeholder.com/80?text=Shampoo" alt="Shampoo">
+                        <h3>Shampoo</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Sunscreen clicked')">
+                        <img src="https://via.placeholder.com/80?text=Sunscreen" alt="Sunscreen SPF 50">
+                        <h3>Sunscreen SPF 50</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Hair Serum clicked')">
+                        <img src="https://via.placeholder.com/80?text=Hair+Serum" alt="Hair Serum">
+                        <h3>Hair Serum</h3><p>₹349 <span class="discount">₹400</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Face Mask clicked')">
+                        <img src="https://via.placeholder.com/80?text=Face+Mask" alt="Face Mask">
+                        <h3>Face Mask</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Conditioner clicked')">
+                        <img src="https://via.placeholder.com/80?text=Conditioner" alt="Conditioner">
+                        <h3>Conditioner</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Body Lotion clicked')">
+                        <img src="https://via.placeholder.com/80?text=Body+Lotion" alt="Body Lotion">
+                        <h3>Body Lotion</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Anti-Dandruff Shampoo clicked')">
+                        <img src="https://via.placeholder.com/80?text=Anti-Dandruff+Shampoo" alt="Anti-Dandruff Shampoo">
+                        <h3>Anti-Dandruff Shampoo</h3><p>₹349 <span class="discount">₹400</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Lip Balm clicked')">
+                        <img src="https://via.placeholder.com/80?text=Lip+Balm" alt="Lip Balm">
+                        <h3>Lip Balm</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Face Scrub clicked')">
+                        <img src="https://via.placeholder.com/80?text=Face+Scrub" alt="Face Scrub">
+                        <h3>Face Scrub</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pain-relief-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Paracetamol clicked')">
+                        <img src="https://via.placeholder.com/80?text=Paracetamol" alt="Paracetamol 500mg">
+                        <h3>Paracetamol 500mg</h3><p>₹20 <span class="discount">₹25</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Ibuprofen clicked')">
+                        <img src="https://via.placeholder.com/80?text=Ibuprofen" alt="Ibuprofen 400mg">
+                        <h3>Ibuprofen 400mg</h3><p>₹30 <span class="discount">₹40</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Pain Gel clicked')">
+                        <img src="https://via.placeholder.com/80?text=Pain+Gel" alt="Pain Relief Gel">
+                        <h3>Pain Relief Gel</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Heat Patch clicked')">
+                        <img src="https://via.placeholder.com/80?text=Heat+Patch" alt="Heat Patch">
+                        <h3>Heat Patch</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Muscle Relaxant clicked')">
+                        <img src="https://via.placeholder.com/80?text=Muscle+Relaxant" alt="Muscle Relaxant">
+                        <h3>Muscle Relaxant</h3><p>₹250 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Pain Relief Spray clicked')">
+                        <img src="https://via.placeholder.com/80?text=Pain+Relief+Spray" alt="Pain Relief Spray">
+                        <h3>Pain Relief Spray</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Cold Pack clicked')">
+                        <img src="https://via.placeholder.com/80?text=Cold+Pack" alt="Cold Pack">
+                        <h3>Cold Pack</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Joint Support clicked')">
+                        <img src="https://via.placeholder.com/80?text=Joint+Support" alt="Joint Support">
+                        <h3>Joint Support</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Pain Relief Patch clicked')">
+                        <img src="https://via.placeholder.com/80?text=Pain+Relief+Patch" alt="Pain Relief Patch">
+                        <h3>Pain Relief Patch</h3><p>₹149 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Diclofenac Gel clicked')">
+                        <img src="https://via.placeholder.com/80?text=Diclofenac+Gel" alt="Diclofenac Gel">
+                        <h3>Diclofenac Gel</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Aceclofenac clicked')">
+                        <img src="https://via.placeholder.com/80?text=Aceclofenac" alt="Aceclofenac">
+                        <h3>Aceclofenac (10)</h3><p>₹50 <span class="discount">₹60</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Knee Support clicked')">
+                        <img src="https://via.placeholder.com/80?text=Knee+Support" alt="Knee Support">
+                        <h3>Knee Support</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="vitamins-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Vitamin D3 clicked')">
+                        <img src="https://via.placeholder.com/80?text=Vitamin+D3" alt="Vitamin D3">
+                        <h3>Vitamin D3</h3><p>₹200 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Multivitamin clicked')">
+                        <img src="https://via.placeholder.com/80?text=Multivitamin" alt="Multivitamin">
+                        <h3>Multivitamin</h3><p>₹300 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Vitamin C clicked')">
+                        <img src="https://via.placeholder.com/80?text=Vitamin+C" alt="Vitamin C 500mg">
+                        <h3>Vitamin C 500mg</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Calcium clicked')">
+                        <img src="https://via.placeholder.com/80?text=Calcium" alt="Calcium Tablets">
+                        <h3>Calcium Tablets</h3><p>₹250 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Iron clicked')">
+                        <img src="https://via.placeholder.com/80?text=Iron" alt="Iron Supplement">
+                        <h3>Iron Supplement</h3><p>₹199 <span class="discount">₹240</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Vitamin B12 clicked')">
+                        <img src="https://via.placeholder.com/80?text=Vitamin+B12" alt="Vitamin B12">
+                        <h3>Vitamin B12</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Zinc Supplement clicked')">
+                        <img src="https://via.placeholder.com/80?text=Zinc" alt="Zinc Supplement">
+                        <h3>Zinc Supplement</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Magnesium clicked')">
+                        <img src="https://via.placeholder.com/80?text=Magnesium" alt="Magnesium">
+                        <h3>Magnesium</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Vitamin E clicked')">
+                        <img src="https://via.placeholder.com/80?text=Vitamin+E" alt="Vitamin E">
+                        <h3>Vitamin E</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Folic Acid clicked')">
+                        <img src="https://via.placeholder.com/80?text=Folic+Acid" alt="Folic Acid">
+                        <h3>Folic Acid</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Biotin clicked')">
+                        <img src="https://via.placeholder.com/80?text=Biotin" alt="Biotin">
+                        <h3>Biotin</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Vitamin K2 clicked')">
+                        <img src="https://via.placeholder.com/80?text=Vitamin+K2" alt="Vitamin K2">
+                        <h3>Vitamin K2</h3><p>₹499 <span class="discount">₹550</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wellness-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Herbal Tea clicked')">
+                        <img src="https://via.placeholder.com/80?text=Herbal+Tea" alt="Herbal Tea">
+                        <h3>Herbal Tea</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Yoga Mat clicked')">
+                        <img src="https://via.placeholder.com/80?text=Yoga+Mat" alt="Yoga Mat">
+                        <h3>Yoga Mat</h3><p>₹499 <span class="discount">₹600</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Aromatherapy clicked')">
+                        <img src="https://via.placeholder.com/80?text=Aromatherapy" alt="Aromatherapy Oil">
+                        <h3>Aromatherapy Oil</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Protein clicked')">
+                        <img src="https://via.placeholder.com/80?text=Protein" alt="Protein Powder">
+                        <h3>Protein Powder</h3><p>₹999 <span class="discount">₹1200</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Massage Roller clicked')">
+                        <img src="https://via.placeholder.com/80?text=Massage+Roller" alt="Massage Roller">
+                        <h3>Massage Roller</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Essential Oil Diffuser clicked')">
+                        <img src="https://via.placeholder.com/80?text=Essential+Oil+Diffuser" alt="Essential Oil Diffuser">
+                        <h3>Essential Oil Diffuser</h3><p>₹799 <span class="discount">₹900</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Meditation Cushion clicked')">
+                        <img src="https://via.placeholder.com/80?text=Meditation+Cushion" alt="Meditation Cushion">
+                        <h3>Meditation Cushion</h3><p>₹499 <span class="discount">₹550</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Green Tea clicked')">
+                        <img src="https://via.placeholder.com/80?text=Green+Tea" alt="Green Tea">
+                        <h3>Green Tea</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Sleep Mask clicked')">
+                        <img src="https://via.placeholder.com/80?text=Sleep+Mask" alt="Sleep Mask">
+                        <h3>Sleep Mask</h3><p>₹149 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Stress Relief Ball clicked')">
+                        <img src="https://via.placeholder.com/80?text=Stress+Relief+Ball" alt="Stress Relief Ball">
+                        <h3>Stress Relief Ball</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Detox Tea clicked')">
+                        <img src="https://via.placeholder.com/80?text=Detox+Tea" alt="Detox Tea">
+                        <h3>Detox Tea</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Resistance Band clicked')">
+                        <img src="https://via.placeholder.com/80?text=Resistance+Band" alt="Resistance Band">
+                        <h3>Resistance Band</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="baby-care-products" class="product-list">
+            <div class="product-grid">
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Baby Diapers clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Diapers" alt="Baby Diapers">
+                        <h3>Baby Diapers (10)</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Lotion clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Lotion" alt="Baby Lotion">
+                        <h3>Baby Lotion</h3><p>₹199 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Powder clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Powder" alt="Baby Powder">
+                        <h3>Baby Powder</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Wipes clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Wipes" alt="Baby Wipes">
+                        <h3>Baby Wipes (50)</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Shampoo clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Shampoo" alt="Baby Shampoo">
+                        <h3>Baby Shampoo</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Diaper Rash Cream clicked')">
+                        <img src="https://via.placeholder.com/80?text=Diaper+Rash+Cream" alt="Diaper Rash Cream">
+                        <h3>Diaper Rash Cream</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+                <div class="product-row">
+                    <div class="product-card" onclick="alert('Baby Oil clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Oil" alt="Baby Oil">
+                        <h3>Baby Oil</h3><p>₹149 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Soap clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Soap" alt="Baby Soap">
+                        <h3>Baby Soap</h3><p>₹99 <span class="discount">₹120</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Bath Tub clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Bath+Tub" alt="Baby Bath Tub">
+                        <h3>Baby Bath Tub</h3><p>₹499 <span class="discount">₹550</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Bottle clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Bottle" alt="Baby Bottle">
+                        <h3>Baby Bottle</h3><p>₹199 <span class="discount">₹230</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Cream clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Cream" alt="Baby Cream">
+                        <h3>Baby Cream</h3><p>₹249 <span class="discount">₹300</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                    <div class="product-card" onclick="alert('Baby Wash clicked')">
+                        <img src="https://via.placeholder.com/80?text=Baby+Wash" alt="Baby Wash">
+                        <h3>Baby Wash</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="featured-products" class="featured-products">
+        <h2 onclick="alert('Featured Products clicked')">Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-row">
+                <div class="product-card" onclick="alert('Paracetamol clicked')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXxIK8z7sJMtoRqSPDwiSPluKMXgCp_B9Wpg&s" alt="Paracetamol 500mg">
+                    <h3>Paracetamol 500mg</h3><p>₹20 <span class="discount">₹25</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('BP Monitor clicked')">
+                    <img src="https://m.media-amazon.com/images/I/71-qOprKrIL._AC_UF1000,1000_QL80_.jpg" alt="BP Monitor">
+                    <h3>BP Monitor</h3><p>₹999 <span class="discount">₹1200</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Multivitamin clicked')">
+                    <img src="https://asitisnutrition.com/cdn/shop/products/ProductImage.jpg?v=1639026431&width=600" alt="Multivitamin">
+                    <h3>Multivitamin</h3><p>₹300 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Face Wash clicked')">
+                    <img src="https://beardo.in/cdn/shop/files/Charcoal_face_wash_200ml.webp?v=1742191726&width=1946" alt="Face Wash">
+                    <h3>Face Wash</h3><p>₹199 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Glucose Meter clicked')">
+                    <img src="https://drtrust.in/cdn/shop/products/dr-trust-usa-glucose-monitor-glucometer-sugar-check-test-10-strips-113-29061094146094.png?v=1682059774" alt="Glucose Meter">
+                    <h3>Glucose Meter</h3><p>₹799 <span class="discount">₹900</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Oximeter clicked')">
+                    <img src="https://m.media-amazon.com/images/I/71F1eAU7J2L._AC_UF1000,1000_QL80_.jpg" alt="Pulse Oximeter">
+                    <h3>Pulse Oximeter</h3><p>₹599 <span class="discount">₹700</span></p><a href="#add" class="btn">Add</a>
+                </div>
+            </div>
+            <div class="product-row">
+                <div class="product-card" onclick="alert('Vitamin D3 clicked')">
+                    <img src="https://m.media-amazon.com/images/I/71RVHEJk-cL.jpg" alt="Vitamin D3">
+                    <h3>Vitamin D3</h3><p>₹200 <span class="discount">₹250</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Pain Gel clicked')">
+                    <img src="https://rukminim3.flixcart.com/image/850/1000/xif0q/body-pain-relief/d/x/l/-original-imahfy7xuycb5qx2.jpeg?q=90&crop=false" alt="Pain Relief Gel">
+                    <h3>Pain Relief Gel</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Sunscreen clicked')">
+                    <img src="https://www.fixderma.com/cdn/shop/files/Shadow_50_gel_75g.webp?v=1739536607" alt="Sunscreen SPF 50">
+                    <h3>Sunscreen SPF 50</h3><p>₹399 <span class="discount">₹450</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Baby Diapers clicked')">
+                    <img src="https://www.menmoms.in/cdn/shop/files/MM-3060-M-_PK-of-28_-1.jpg?v=1734341164&width=600" alt="Baby Diapers">
+                    <h3>Baby Diapers (10)</h3><p>₹299 <span class="discount">₹350</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Protein Powder clicked')">
+                    <img src="https://m.media-amazon.com/images/I/71BFejouWCL.jpg" alt="Protein Powder">
+                    <h3>Protein Powder</h3><p>₹999 <span class="discount">₹1200</span></p><a href="#add" class="btn">Add</a>
+                </div>
+                <div class="product-card" onclick="alert('Herbal Tea clicked')">
+                    <img src="https://t4.ftcdn.net/jpg/01/98/93/59/360_F_198935939_rvUXMPDkMfSE66I4tDXG5qu7ghhBZr7H.jpg" alt="Herbal Tea">
+                    <h3>Herbal Tea</h3><p>₹150 <span class="discount">₹180</span></p><a href="#add" class="btn">Add</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers -->
+    <section id="offers" class="offers">
+        <h2 onclick="alert('Exclusive Offers clicked')">Exclusive Offers</h2>
+        <div class="offer-grid">
+            <div class="offer-card" onclick="window.scrollTo({ top: document.querySelector('#categories').offsetTop, behavior: 'smooth' })">
+                <p>Flat 25% OFF on Medicines</p>
+                <a href="#categories" class="btn">Shop Now</a>
+            </div>
+            <div class="offer-card" onclick="alert('Full Body Checkup clicked')">
+                <p>Full Body Checkup at ₹999</p>
+                <a href="#lab-tests" class="btn">Book Now</a>
+            </div>
+            <div class="offer-card" onclick="alert('First Lab Test clicked')">
+                <p>50% OFF on First Lab Test</p>
+                <a href="#lab-tests" class="btn">Book Now</a>
+            </div>
+            <div class="offer-card" onclick="alert('Vitamin Combo clicked')">
+                <p>Buy 2 Vitamins Get 1 Free</p>
+                <a href="#categories" class="btn">Shop Now</a>
+            </div>
+            <div class="offer-card" onclick="alert('Diabetic Care clicked')">
+                <p>20% OFF on Diabetic Care</p>
+                <a href="#categories" class="btn">Shop Now</a>
+            </div>
+            <div class="offer-card" onclick="alert('Skin Care clicked')">
+                <p>30% OFF on Skin Care</p>
+                <a href="#categories" class="btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html" onclick="window.location.href='about.html'; return false;"><i class="fa-solid fa-info-circle"></i> About PharmaMed</a></li>
+                    <li><a href="testimonials.html" onclick="window.location.href='testimonials.html'; return false;"><i class="fa-solid fa-star"></i> Customer Reviews</a></li>
+                    <li><a href="news.html" onclick="window.location.href='news.html'; return false;"><i class="fa-solid fa-newspaper"></i> PharmaMed in the News</a></li>
+                    <li><a href="careers.html" onclick="window.location.href='careers.html'; return false;"><i class="fa-solid fa-briefcase"></i> Careers</a></li>
+                    <li><a href="contact.html" onclick="window.location.href='contact.html'; return false;"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Our Policies</h4>
+                <ul>
+                    <li><a href="terms.html" onclick="window.location.href='terms.html'; return false;"><i class="fa-solid fa-file-contract"></i> Terms and Conditions</a></li>
+                    <li><a href="privacy.html" onclick="window.location.href='privacy.html'; return false;"><i class="fa-solid fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="fees.html" onclick="window.location.href='fees.html'; return false;"><i class="fa-solid fa-credit-card"></i> Fees and Payments Policy</a></li>
+                    <li><a href="shipping.html" onclick="window.location.href='shipping.html'; return false;"><i class="fa-solid fa-truck"></i> Shipping and Delivery Policy</a></li>
+                    <li><a href="returns.html" onclick="window.location.href='returns.html'; return false;"><i class="fa-solid fa-undo"></i> Return, Refund, and Cancellation Policy</a></li>
+                    <li><a href="faq.html" onclick="window.location.href='faq.html'; return false;"><i class="fa-solid fa-question-circle"></i> FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Shopping</h4>
+                <ul>
+                    <li><a href="browse.html" onclick="window.location.href='browse.html'; return false;"><i class="fa-solid fa-search"></i> Browse Medicines A-Z</a></li>
+                    <li><a href="manufacturers.html" onclick="window.location.href='manufacturers.html'; return false;"><i class="fa-solid fa-industry"></i> Browse by Manufacturers</a></li>
+                    <li><a href="health-articles.html" onclick="window.location.href='health-articles.html'; return false;"><i class="fa-solid fa-book"></i> Health Articles</a></li>
+                    <li><a href="offers.html" onclick="window.location.href='offers.html'; return false;"><i class="fa-solid fa-tag"></i> Offers / Coupons</a></li>
+                    <li><a href="faq.html" onclick="window.location.href='faq.html'; return false;"><i class="fa-solid fa-question-circle"></i> FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Popular Categories</h4>
+                <ul>
+                    <li><a href="diabetic-care.html" onclick="window.location.href='diabetic-care.html'; return false;"><i class="fa-solid fa-syringe"></i> Diabetic Care</a></li>
+                    <li><a href="heart-health.html" onclick="window.location.href='heart-health.html'; return false;"><i class="fa-solid fa-heart"></i> Heart Health</a></li>
+                    <li><a href="skin-hair.html" onclick="window.location.href='skin-hair.html'; return false;"><i class="fa-solid fa-face-smile"></i> Skin & Hair</a></li>
+                    <li><a href="pain-relief.html" onclick="window.location.href='pain-relief.html'; return false;"><i class="fa-solid fa-bandage"></i> Pain Relief</a></li>
+                    <li><a href="vitamins.html" onclick="window.location.href='vitamins.html'; return false;"><i class="fa-solid fa-pills"></i> Vitamins</a></li>
+                    <li><a href="wellness.html" onclick="window.location.href='wellness.html'; return false;"><i class="fa-solid fa-spa"></i> Wellness</a></li>
+                    <li><a href="baby-care.html" onclick="window.location.href='baby-care.html'; return false;"><i class="fa-solid fa-baby"></i> Baby Care</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="patients.html" onclick="window.location.href='patients.html'; return false;"><i class="fa-solid fa-users"></i> Patients Community</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="https://facebook.com" onclick="window.location.href='https://facebook.com'; return false;"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://twitter.com" onclick="window.location.href='https://twitter.com'; return false;"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://linkedin.com" onclick="window.location.href='https://linkedin.com'; return false;"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://youtube.com" onclick="window.location.href='https://youtube.com'; return false;"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/sahilmirza18_/" onclick="window.location.href='https://www.instagram.com/sahilmirza18_/'; return false;"><i class="fa-brands fa-instagram"></i>
+</a>
+
+                </div>
+                <ul>
+                    <li><a href="refer.html" onclick="window.location.href='refer.html'; return false;"><i class="fa-solid fa-gift"></i> Refer & Earn</a></li>
+                </ul>
+            </div>
+            <div class="footer-column newsletter" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                <div style="flex: 1; min-width: 180px;">
+                    <h4>Subscribe to Our Newsletter</h4>
+                    <p>Get the latest health tips, offers, and updates!</p>
+                    <form onsubmit="event.preventDefault(); window.location.href='newsletter-subscribed.html';">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                    <div class="app-links">
+                        <a href="https://play.google.com" onclick="window.location.href='https://play.google.com'; return false;"><img src="https://logos-world.net/wp-content/uploads/2020/11/Google-Play-Emblem.png" alt="Google Play"></a>
+                        <a href="https://www.apple.com/app-store" onclick="window.location.href='https://www.apple.com/app-store'; return false;"><img src="https://developer.apple.com/news/images/og/app-store-og.png" alt="App Store"></a>
+                    </div>
+                </div>
+                <div class="footer-column payment-partners" style="flex: 1; min-width: 180px;">
+                    <h4>Our Payment Partners</h4>
+                    <div class="payment-partners">
+                        <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202011/Screenshot_2020-11-05_at_5.14._1200x768.png?size=1200:675" alt="Google Pay" onclick="window.location.href='https://pay.google.com';">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX1y9bRtwN4tkv5dwh33YdbbnJIBj-PRHmWg&s" alt="PhonePe" onclick="window.location.href='https://www.phonepe.com';">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJHlcl8eG_xFtoR_0utZ_OZN3t0kaMx9tqcA&s" alt="Paytm" onclick="window.location.href='https://paytm.com';">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_ZyEo118FEVM-LU-hhlNgJWcG12HrvJ_8w&s" alt="Simpl" onclick="window.location.href='https://getsimpl.com';">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYhxxKLupVDxsYmgkrsk5Hha3WJHjeoiW8xA&s" alt="RuPay" onclick="window.location.href='https://www.rupay.co.in';">
+                        <img src="https://brandlogos.net/wp-content/uploads/2016/11/visa-logo-preview.png" alt="Visa" onclick="window.location.href='https://www.visa.com';">
+                        <img src="https://brandlogos.net/wp-content/uploads/2021/11/mastercard-logo.png" alt="Mastercard" onclick="window.location.href='https://www.mastercard.com';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Original JavaScript -->
+    <script>
+        // Toggle product lists
+        const categoryCards = document.querySelectorAll('.category-card');
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const targetId = card.getAttribute('data-target');
+                const productList = document.getElementById(targetId);
+                const isActive = productList.style.display === 'block';
+
+                document.querySelectorAll('.product-list').forEach(list => {
+                    list.style.display = 'none';
+                });
+
+                if (!isActive) {
+                    productList.style.display = 'block';
+                }
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Search bar functionality
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-button');
+        
+        searchInput.addEventListener('click', () => {
+            alert('Search bar clicked! Enter your query.');
+        });
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && searchInput.value.trim()) {
+                alert('Searching for: ' + searchInput.value);
+            }
+        });
+        searchButton.addEventListener('click', () => {
+            if (searchInput.value.trim()) {
+                alert('Searching for: ' + searchInput.value);
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+    </script>
+
+    <!-- Additional JavaScript for New Features -->
+    <script>
+        // Cart Functionality
+        let cartCount = 0;
+        const cartCounter = document.createElement('span');
+        cartCounter.id = 'cart-count';
+        cartCounter.style.marginLeft = '10px';
+        cartCounter.textContent = 'Cart: 0';
+        document.querySelector('.nav-menu').appendChild(cartCounter);
+
+        document.querySelectorAll('.btn[href="#add"]').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                cartCount++;
+                cartCounter.textContent = `Cart: ${cartCount}`;
+                const productName = button.parentElement.querySelector('h3').textContent;
+                alert(`${productName} added to cart!`);
+            });
+        });
+
+        // Enhanced Search Functionality (Filters Featured Products)
+        const featuredProducts = document.querySelectorAll('#featured-products .product-card');
+        const originalSearchClick = searchInput.onclick; // Preserve original click behavior
+        const originalSearchKeypress = searchInput.onkeypress; // Preserve original keypress behavior
+        const originalSearchButtonClick = searchButton.onclick; // Preserve original button click behavior
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim().toLowerCase();
+            featuredProducts.forEach(product => {
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+                product.style.display = productName.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        // Preserve original search behaviors
+        searchInput.onclick = originalSearchClick;
+        searchInput.onkeypress = originalSearchKeypress;
+        searchButton.onclick = originalSearchButtonClick;
+
+        // Filter Functionality (Add dropdown above Featured Products)
+        const featuredSection = document.querySelector('#featured-products');
+        const filterDiv = document.createElement('div');
+        filterDiv.style.margin = '20px auto';
+        filterDiv.style.textAlign = 'center';
+        filterDiv.innerHTML = `
+            <label for="category-filter">Filter by Category:
